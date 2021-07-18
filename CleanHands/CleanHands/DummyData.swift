@@ -8,90 +8,6 @@
 import Foundation
 import UIKit
 
-struct AchievementManager:Codable{
-    var completedAchievements: [Achievement]
-    var appearedAchievements: [Achievement]
-    var entireAchievements: [Achievement]
-    
-    static func updateAchievement () {
-        var changed = false
-        for achievement in User.userState.achievementManager.entireAchievements {
-            if (achievement.appeared) {
-                User.userState.achievementManager.appearedAchievements.append(achievement)
-                if let index = User.userState.achievementManager.entireAchievements.firstIndex(of: achievement) {
-                    User.userState.achievementManager.entireAchievements.remove(at: index)
-                }
-                changed = true
-            }
-        }
-        if (changed) {
-            compeleteAchievement()
-        }
-    }
-    static func compeleteAchievement() {
-        var changed = false
-        for var achievement in User.userState.achievementManager.appearedAchievements {
-            if (achievement.completed) {
-                achievement.completeDate = Date()
-                User.userState.achievementManager.completedAchievements.append(achievement)
-                if let index = User.userState.achievementManager.appearedAchievements.firstIndex(of: achievement) {
-                    User.userState.achievementManager.appearedAchievements.remove(at: index)
-                }
-                changed = true
-            }
-        }
-        if (changed) {
-            User.addAvailablePathogens()
-            updateAchievement()
-        }
-    }
-}
-
-struct Achievement:Equatable, Codable{
-    let id: Int
-    let name: String
-    let description: String
-    let reward: Int
-    let appearConditions: [Achievement]
-    let completeConditions: [Pathogen:Int]
-    var completeDate:Date?
-    
-    var appeared:Bool {
-        for achievementCondition in appearConditions {
-            if (!User.userState.achievementManager.completedAchievements.contains(achievementCondition)) {
-                return false
-            }
-        }
-        return true
-    }
-    
-    var completed: Bool {
-        let userPathogenDic = User.userState.pathogenDic
-        for (pathogen, number) in self.completeConditions {
-            guard let pathogenAmount = userPathogenDic[pathogen] else {
-                return false
-            }
-            if (pathogenAmount < number) {
-                return false
-            }
-        }
-        
-        return true
-    }
-    
-    init(name:String, description:String, completeConditions:[Pathogen:Int], appearConditions: [Achievement], id:Int) {
-        self.name = name
-        self.description = description
-        self.completeConditions = completeConditions
-        self.appearConditions = appearConditions
-        self.reward = 0
-        self.id = id
-    }
-    static func == (lhs:Achievement, rhs:Achievement)->Bool {
-        return lhs.id == rhs.id
-    }
-}
-
 //병원체
 struct Pathogen : Equatable, Codable{
     static func == (lhs: Pathogen, rhs: Pathogen) -> Bool {
@@ -189,7 +105,7 @@ struct HandState: Codable{
 }
 
 
-var escherichiaCoil = Pathogen(type: .mold, name: "대장균", exp: 10, description: "제 2 위험군\n전략물자통제병원체\nEnterobacteriaceae과, 그람음성, 간균, 주모(peritrichous flagella)를 가지고 있어 운동성 있음, 포자형성 안함.", illnesses: [], symptom: "패혈증, 요로감염, 위장관염, 수막염, 폐렴 등 다양한 질병", careMethod: "수분공급, 전해질 교정, EPEC, EIEC의 경우 tremethoprim-sulfamethoxazole, quineolones, EHEC는 용혈성요독증후군 유발 위험으로 항생제 사용이 권장되지 않음.", location: "오염된 음식, 물 섭취, 분변-경구 매개체를 통한 감염, 사람-사람 간 전파에 의하여 감염.", frequency: Frequency.high, image: "EscherichiaCoil.png", requiredAchievements: [achievement_sal])
+var escherichiaCoil = Pathogen(type: .mold, name: "대장균", exp: 10, description: "제 2 위험군\n전략물자통제병원체\nEnterobacteriaceae과, 그람음성, 간균, 주모(peritrichous flagella)를 가지고 있어 운동성 있음, 포자형성 안함.", illnesses: [], symptom: "패혈증, 요로감염, 위장관염, 수막염, 폐렴 등 다양한 질병", careMethod: "수분공급, 전해질 교정, EPEC, EIEC의 경우 tremethoprim-sulfamethoxazole, quineolones, EHEC는 용혈성요독증후군 유발 위험으로 항생제 사용이 권장되지 않음.", location: "오염된 음식, 물 섭취, 분변-경구 매개체를 통한 감염, 사람-사람 간 전파에 의하여 감염.", frequency: Frequency.high, image: "EscherichiaCoil.png", requiredAchievements: [achievement_tutorial])
 var salmonella = Pathogen(type: .mold, name: "살모넬라균", exp: 10, description: "제 2 위험군\n전략물자통제병원체\nEnterobacteriaceae과, 그람음성, 막대균, 주모성 편모가 있어 운동성 활발, 조건무산소성", illnesses: [], symptom: "발열, 두통, 오심, 구토, 복통, 설사 등의 위장증상", careMethod: "경구 또는 정맥으로 수분보충, 항상제 치료", location: "오염된 물(지하수 및 음용수 등)이나 음식을 통한 전파\n살모넬라균에 감염된 동물이나 감염된 동물 주변 환경에 접촉하여 감염", frequency: Frequency.high, image: "Salmonellas.png", requiredAchievements: [])
 //var coronaVirus = Pathogen(type: .virus, name: "코로나 바이러스", exp: 5, description: "제 2 위험군\nCoronaviridae과 Coronavirinae속, (+)ssRNA, 나선형 뉴클레오캡시드, 외피 있음", illnesses: [], symptom: "급성 호흡기감염증을 유발", careMethod: "보존적 치료", location: "호흡기 비말 흡입, 분변­경구 경로 전파", frequency: Frequency.high, image: "Coronavirus.png",requiredAchievements: [achievement_esch])
 var sars = Pathogen(type: .virus, name: "사스 바이러스", exp: 20, description: "제 3 위험군\n고위험병원체, 생물작용제, 전략물자통제병원체\nCoronaviridae과, Betacoronavirus속, (+)ssRNA 바이러스, 피막 있음, 왕관모양", illnesses: [], symptom: "중증 급성 호흡기 증후군(SARS)을 유발\n 초기에는 감기와 비슷한 증상, 2~7일 후에 마른 헛기침, 호흡 곤란 또는 저산소증과 같은 호흡기 증상", careMethod: "항바이러스제는 없으며, 환자 상태에 따라 대증치료, 유효한 백신 없음", location: "주로 호흡기 비말을 통해 감염됨. 감염자와의 밀접한 접촉이나 감염자의 인체 분비액이 눈, 코, 입 등의 점막에 직접 또는 간접적으로 접촉되는 경우 감염", frequency: Frequency.low, image: "SARS.png", requiredAchievements: [achievement_esch])

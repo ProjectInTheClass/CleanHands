@@ -156,7 +156,8 @@ class HandViewController: UIViewController {
     }
     @objc func onTimePassed() {
         let currentDate = Date()
-        let expectedPathongenNumber = Int(currentDate.timeIntervalSince(User.userState.handState.lastWashTime)/pathogenCreateInterval)
+        var expectedPathongenNumber = Int(currentDate.timeIntervalSince(User.userState.handState.lastWashTime)/pathogenCreateInterval)
+        expectedPathongenNumber = 120
 
         if (expectedPathongenNumber < pathogenImageList.count) {
             for i in pathogenImageList {
@@ -225,10 +226,16 @@ class HandViewController: UIViewController {
                 User.userState.pathogenDic[capturedPathogen] = number
             }
         }
-        AchievementManager.updateAchievement()
-        AchievementManager.compeleteAchievement()
+        //AchievementManager.updateAchievement()
+        achievementCompeleteCheck()
         
         flushPathogenImageList()
+    }
+    func achievementCompeleteCheck() {
+        let snackbarTexts = AchievementManager.compeleteAchievement()
+        for text in snackbarTexts {
+            SnackbarView(text: text, view).animate(view)
+        }
     }
 
     func getRandomPathogen(_ num:Int) {
@@ -262,7 +269,6 @@ class HandViewController: UIViewController {
         removePathogen()
         saveUserState()
         presentWashResultView()
-        showSnackbar()
     }
     
 //    func presentTimerModal() {
@@ -315,8 +321,8 @@ class HandViewController: UIViewController {
                     
                     self.onTimePassed()
                     
-                    AchievementManager.updateAchievement()
-                    AchievementManager.compeleteAchievement()
+                    //AchievementManager.updateAchievement()
+                    self.achievementCompeleteCheck()
                     
                     self.washDataViewString = "접속하지 않는 동안 손을 씻었어요!"
                     //self.captureSuccess = true
@@ -326,10 +332,6 @@ class HandViewController: UIViewController {
             }
             
         }
-    }
-    func showSnackbar() {
-        let snackbar = SnackbarView(text: "test", view)
-        snackbar.animate(view)
     }
 }
 

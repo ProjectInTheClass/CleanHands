@@ -15,6 +15,8 @@ import UIKit
 //}
 
 class SnackbarView:UIView {
+    
+    public static let snackbarQueue = DispatchQueue(label: "snackbar")
 //    let viewModel: SnackbarViewModel
     let text:String
     let textLabel:UILabel = {
@@ -65,23 +67,30 @@ class SnackbarView:UIView {
     
     func animate(_ view:UIView) {
         view.addSubview(self)
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            self.frame = CGRect(x: self.frame.minX, y: self.frame.minY - 70, width: self.frame.width, height: self.frame.height)
-        }, completion: { finished in
-            if (finished) {
-                DispatchQueue.main.asyncAfter(deadline: .now()+2, execute: {
-                    UIView.animate(withDuration: 0.5, animations: {
-                        self.frame = CGRect(x: self.frame.minX, y: self.frame.minY + 70, width: self.frame.width, height: self.frame.height)
-                    }, completion: { done in
-                        if (done) {
-                            self.removeFromSuperview()
-                        }
-                    })
-                    
+        SnackbarView.snackbarQueue.async {
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.frame = CGRect(x: self.frame.minX, y: self.frame.minY - 70, width: self.frame.width, height: self.frame.height)
+                }, completion: { finished in
+                    if (finished) {
+                        DispatchQueue.main.asyncAfter(deadline: .now()+2, execute: {
+                            UIView.animate(withDuration: 0.5, animations: {
+                                self.frame = CGRect(x: self.frame.minX, y: self.frame.minY + 70, width: self.frame.width, height: self.frame.height)
+                            }, completion: { done in
+                                if (done) {
+                                    self.removeFromSuperview()
+                                }
+                            })
+                            
+                        })
+                    }
                 })
             }
-        })
+            sleep(3)
+            
+        }
+        
     }
 }
+
 
