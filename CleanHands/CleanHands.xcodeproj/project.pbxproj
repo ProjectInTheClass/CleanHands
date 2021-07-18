@@ -23,6 +23,7 @@
 		7A7F0E4B266EF3350038B3FF /* AchievementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F0E4A266EF3350038B3FF /* AchievementViewController.swift */; };
 		7A7F0E4F266F77480038B3FF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A7F0E4E266F77480038B3FF /* HealthKit.framework */; };
 		7A7F0E51267100470038B3FF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F0E50267100470038B3FF /* MainViewController.swift */; };
+		7ABF5DB326A2D31100E2A83F /* SnackbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABF5DB226A2D31100E2A83F /* SnackbarView.swift */; };
 		F13D8ECE2643EC6E00492E92 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13D8ECD2643EC6E00492E92 /* DummyData.swift */; };
 		F13D8ED72644100100492E92 /* Hand.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F13D8ED62644100100492E92 /* Hand.storyboard */; };
 		F13D8EE52645281C00492E92 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13D8EE42645281C00492E92 /* StatisticViewController.swift */; };
@@ -55,6 +56,7 @@
 		7A7F0E4D266F77480038B3FF /* CleanHands.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CleanHands.entitlements; sourceTree = "<group>"; };
 		7A7F0E4E266F77480038B3FF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		7A7F0E50267100470038B3FF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		7ABF5DB226A2D31100E2A83F /* SnackbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackbarView.swift; sourceTree = "<group>"; };
 		86E1CFD389E4207CA0DCB4F2 /* Pods_CleanHands.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CleanHands.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3946C4C15ED2ECFF19BAF25 /* Pods-CleanHands.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanHands.debug.xcconfig"; path = "Target Support Files/Pods-CleanHands/Pods-CleanHands.debug.xcconfig"; sourceTree = "<group>"; };
 		E26F87257DD2CF62ACE9FEE6 /* Pods-CleanHands.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanHands.release.xcconfig"; path = "Target Support Files/Pods-CleanHands/Pods-CleanHands.release.xcconfig"; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				7A1D340B26452F5A002D460D /* HandViewController.swift */,
 				7A50EFAD265A8445008FF744 /* TimerModalViewController.swift */,
 				7A0073D52665E58F00E7057B /* WashResultViewController.swift */,
+				7ABF5DB226A2D31100E2A83F /* SnackbarView.swift */,
 			);
 			path = HandView;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				7A0073D62665E58F00E7057B /* WashResultViewController.swift in Sources */,
 				7A50EFAE265A8445008FF744 /* TimerModalViewController.swift in Sources */,
 				27D3764B264521C40074EDAC /* CollectionTableViewController.swift in Sources */,
+				7ABF5DB326A2D31100E2A83F /* SnackbarView.swift in Sources */,
 				F16064AB261EF2820072858F /* ViewController.swift in Sources */,
 				7A7F0E51267100470038B3FF /* MainViewController.swift in Sources */,
 				F13D8EE52645281C00492E92 /* StatisticViewController.swift in Sources */,

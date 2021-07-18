@@ -26,7 +26,7 @@ class HandViewController: UIViewController {
     
     var washDataViewString = "무슨 세균을 잡았을까?"
     
-    let pathogenCreateInterval:Double = 60
+    let pathogenCreateInterval:Double = 1
     let maxPathogenNum = 120
     let percentageOfGettingRarePathogen = 0.3
     let percentageOfGettingEpicPathogen = 0.1
@@ -230,7 +230,6 @@ class HandViewController: UIViewController {
         
         flushPathogenImageList()
     }
-    
 
     func getRandomPathogen(_ num:Int) {
         let randomInt = Int.random(in: 0...User.userState.availablePathogens.count-1)
@@ -263,6 +262,7 @@ class HandViewController: UIViewController {
         removePathogen()
         saveUserState()
         presentWashResultView()
+        showSnackbar()
     }
     
 //    func presentTimerModal() {
@@ -326,6 +326,10 @@ class HandViewController: UIViewController {
             }
             
         }
+    }
+    func showSnackbar() {
+        let snackbar = SnackbarView(text: "test", view)
+        snackbar.animate(view)
     }
 }
 
