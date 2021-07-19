@@ -226,7 +226,6 @@ class HandViewController: UIViewController {
                 User.userState.pathogenDic[capturedPathogen] = number
             }
         }
-        //AchievementManager.updateAchievement()
         achievementCompeleteCheck()
         
         flushPathogenImageList()
@@ -234,7 +233,7 @@ class HandViewController: UIViewController {
     func achievementCompeleteCheck() {
         let snackbarTexts = AchievementManager.compeleteAchievement()
         for text in snackbarTexts {
-            SnackbarView(text: text, view).animate(view)
+            SnackbarView(text: text, view).animate()
         }
     }
 

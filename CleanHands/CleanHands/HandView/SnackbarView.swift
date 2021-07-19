@@ -35,11 +35,12 @@ class SnackbarView:UIView {
     
     init(text:String, _ view: UIView) {
         self.text = text
-        let adjustedFrame = CGRect(x: 0, y: view.frame.height - view.safeAreaInsets.bottom, width: view.frame.width, height: 60)
+        let adjustedFrame = CGRect(x: 10, y: view.frame.height - view.safeAreaInsets.bottom , width: view.frame.width - 20, height: 56)
+        //let adjustedFrame = CGRect(x: 0, y: view.safeAreaInsets.top - 70 , width: view.frame.width, height: 56)
         super.init(frame: adjustedFrame)
         
         backgroundColor = UIColor(red: 178/255, green: 211/255, blue: 227/255, alpha: 1)
-        layer.cornerRadius = 5
+        layer.cornerRadius = 14
         
         addSubview(textLabel)
         //addSubview(image)
@@ -65,8 +66,8 @@ class SnackbarView:UIView {
         //image.image = viewModel.image
     }
     
-    func animate(_ view:UIView) {
-        view.addSubview(self)
+    func animate() {
+        snackbarUIView!.insertSubview(self, at: 1)
         SnackbarView.snackbarQueue.async {
             DispatchQueue.main.async {
                 UIView.animate(withDuration: 0.5, animations: {
