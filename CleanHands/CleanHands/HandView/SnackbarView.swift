@@ -35,8 +35,9 @@ class SnackbarView:UIView {
     
     init(text:String, _ view: UIView) {
         self.text = text
-        let adjustedFrame = CGRect(x: 10, y: view.frame.height - view.safeAreaInsets.bottom , width: view.frame.width - 20, height: 56)
-        //let adjustedFrame = CGRect(x: 0, y: view.safeAreaInsets.top - 70 , width: view.frame.width, height: 56)
+        let padding:CGFloat = 8;
+        let adjustedFrame = CGRect(x: padding, y: view.frame.height - view.safeAreaInsets.bottom , width: view.frame.width - padding*2, height: 56)
+
         super.init(frame: adjustedFrame)
         
         backgroundColor = UIColor(red: 178/255, green: 211/255, blue: 227/255, alpha: 1)
