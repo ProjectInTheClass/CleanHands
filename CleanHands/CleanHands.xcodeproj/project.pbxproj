@@ -46,6 +46,7 @@
 		27D37650264525E40074EDAC /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		27D37653264526260074EDAC /* Statistic.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Statistic.storyboard; sourceTree = "<group>"; };
 		27E651942670FFFB00711243 /* AlarmTimeSelectModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTimeSelectModalViewController.swift; sourceTree = "<group>"; };
+		2D91590E269DA03300F04969 /* RealmPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RealmPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7A0073D52665E58F00E7057B /* WashResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WashResultViewController.swift; sourceTree = "<group>"; };
 		7A1D340B26452F5A002D460D /* HandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandViewController.swift; sourceTree = "<group>"; };
 		7A50EFAD265A8445008FF744 /* TimerModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModalViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +183,7 @@
 				F16064B4261EF2850072858F /* Info.plist */,
 				F13D8ECD2643EC6E00492E92 /* DummyData.swift */,
 				F1BF571F26664857006C5201 /* Util.swift */,
+				2D91590E269DA03300F04969 /* RealmPlayground.playground */,
 			);
 			path = CleanHands;
 			sourceTree = "<group>";
