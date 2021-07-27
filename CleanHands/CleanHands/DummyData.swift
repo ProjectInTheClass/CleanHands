@@ -78,11 +78,7 @@ struct User : Codable{
     var washDataList: [WashData]
     var handState: HandState
     var exp: Int
-    var isAlarmOn: Bool
-    var isDoNotDisturbOn: Bool
-    var doNotDisturbFrom: Date?
-    var doNotDisturbTo: Date?
-    var repeatTime: String?
+    var alarm: Alarm?
     
     static func addAvailablePathogens() {
         for pathogen in pathogenList {

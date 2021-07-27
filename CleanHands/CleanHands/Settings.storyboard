@@ -357,22 +357,6 @@
             </objects>
             <point key="canvasLocation" x="500.00000000000006" y="-141.29464285714286"/>
         </scene>
-        <!--반복-->
-        <scene sceneID="hU6-Bn-PzH">
-            <objects>
-                <tableViewController id="WVN-Si-ZZ2" customClass="AlarmTimeSelectModalViewController" customModule="CleanHands" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="반복" id="TTY-SI-Dol">
-                        <barButtonItem key="leftBarButtonItem" title="닫기" id="7KF-JG-uva">
-                            <connections>
-                                <action selector="navigationLeftButtonTapped:" destination="WVN-Si-ZZ2" id="Ldr-V3-A1j"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rdb-KX-ra9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1545" y="297"/>
-        </scene>
         <!--Alarm Time Select Modal View Controller-->
         <scene sceneID="9JS-xc-Lr2">
             <objects>
@@ -425,9 +409,11 @@
                     </view>
                     <connections>
                         <outlet property="alarmTableView" destination="Pra-eD-oqU" id="Qkw-O9-0WR"/>
+                        <segue destination="hGy-gv-F75" kind="unwind" identifier="unwindToAlarmTableView" unwindAction="unwindToAlarmTableView:" id="hdq-93-4hc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p4C-F6-gh2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="hGy-gv-F75" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2240.5797101449275" y="-141.29464285714286"/>
         </scene>

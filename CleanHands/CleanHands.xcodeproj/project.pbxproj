@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		272BAD2A26ABAFE00071001C /* AlarmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272BAD2926ABAFE00071001C /* AlarmController.swift */; };
+		272BAD2C26ABB1670071001C /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272BAD2B26ABB1670071001C /* NotificationController.swift */; };
+		272BAD2E26ABB6260071001C /* TimePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272BAD2D26ABB6260071001C /* TimePickerCell.swift */; };
+		272BAD3126ABB6870071001C /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272BAD3026ABB6870071001C /* SettingsCell.swift */; };
+		272BAD3326ABB6AA0071001C /* IsDoNotDisturbCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272BAD3226ABB6AA0071001C /* IsDoNotDisturbCell.swift */; };
+		272BAD3526ABB6CC0071001C /* RepeatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272BAD3426ABB6CC0071001C /* RepeatCell.swift */; };
+		272BAD3726ABB6F10071001C /* IsAlarmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272BAD3626ABB6F10071001C /* IsAlarmCell.swift */; };
+		272BAD3926ABB7B90071001C /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272BAD3826ABB7B90071001C /* Alarm.swift */; };
 		273454F5266F4886000C21F3 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273454F4266F4886000C21F3 /* SettingsTableViewController.swift */; };
 		2744C36D265F835500543BD7 /* CollectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2744C36C265F835500543BD7 /* CollectionDetailViewController.swift */; };
 		2787449726708715006AE83D /* SettingsAlarmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2787449626708715006AE83D /* SettingsAlarmTableViewController.swift */; };
@@ -38,6 +46,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		272BAD2926ABAFE00071001C /* AlarmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmController.swift; sourceTree = "<group>"; };
+		272BAD2B26ABB1670071001C /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		272BAD2D26ABB6260071001C /* TimePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerCell.swift; sourceTree = "<group>"; };
+		272BAD3026ABB6870071001C /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		272BAD3226ABB6AA0071001C /* IsDoNotDisturbCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsDoNotDisturbCell.swift; sourceTree = "<group>"; };
+		272BAD3426ABB6CC0071001C /* RepeatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatCell.swift; sourceTree = "<group>"; };
+		272BAD3626ABB6F10071001C /* IsAlarmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsAlarmCell.swift; sourceTree = "<group>"; };
+		272BAD3826ABB7B90071001C /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		273454F4266F4886000C21F3 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		273454FD266F7444000C21F3 /* CleanHandsRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CleanHandsRelease.entitlements; sourceTree = "<group>"; };
 		273454FE266F7444000C21F3 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -89,13 +105,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		272BAD2F26ABB6360071001C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				272BAD2D26ABB6260071001C /* TimePickerCell.swift */,
+				272BAD3026ABB6870071001C /* SettingsCell.swift */,
+				272BAD3226ABB6AA0071001C /* IsDoNotDisturbCell.swift */,
+				272BAD3426ABB6CC0071001C /* RepeatCell.swift */,
+				272BAD3626ABB6F10071001C /* IsAlarmCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		272BAD3A26ABB8960071001C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				273454F4266F4886000C21F3 /* SettingsTableViewController.swift */,
+				27E651942670FFFB00711243 /* AlarmTimeSelectModalViewController.swift */,
+				2787449626708715006AE83D /* SettingsAlarmTableViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		272BAD3B26ABB8E00071001C /* Model Controller */ = {
+			isa = PBXGroup;
+			children = (
+				272BAD2926ABAFE00071001C /* AlarmController.swift */,
+				272BAD2B26ABB1670071001C /* NotificationController.swift */,
+			);
+			name = "Model Controller";
+			sourceTree = "<group>";
+		};
+		272BAD3C26ABB8F80071001C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				272BAD3826ABB7B90071001C /* Alarm.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		273454F3266F47A0000C21F3 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				27D37650264525E40074EDAC /* Settings.storyboard */,
-				273454F4266F4886000C21F3 /* SettingsTableViewController.swift */,
-				2787449626708715006AE83D /* SettingsAlarmTableViewController.swift */,
-				27E651942670FFFB00711243 /* AlarmTimeSelectModalViewController.swift */,
+				272BAD3C26ABB8F80071001C /* Model */,
+				272BAD3B26ABB8E00071001C /* Model Controller */,
+				272BAD3A26ABB8960071001C /* ViewController */,
+				272BAD2F26ABB6360071001C /* Cells */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -327,15 +383,23 @@
 				7A7F0E4B266EF3350038B3FF /* AchievementViewController.swift in Sources */,
 				273454F5266F4886000C21F3 /* SettingsTableViewController.swift in Sources */,
 				7A1D340C26452F5A002D460D /* HandViewController.swift in Sources */,
+				272BAD3726ABB6F10071001C /* IsAlarmCell.swift in Sources */,
 				7A0073D62665E58F00E7057B /* WashResultViewController.swift in Sources */,
 				7A50EFAE265A8445008FF744 /* TimerModalViewController.swift in Sources */,
+				272BAD2A26ABAFE00071001C /* AlarmController.swift in Sources */,
 				27D3764B264521C40074EDAC /* CollectionTableViewController.swift in Sources */,
 				7ABF5DB326A2D31100E2A83F /* SnackbarView.swift in Sources */,
+				272BAD3126ABB6870071001C /* SettingsCell.swift in Sources */,
+				272BAD2C26ABB1670071001C /* NotificationController.swift in Sources */,
+				272BAD3526ABB6CC0071001C /* RepeatCell.swift in Sources */,
 				F16064AB261EF2820072858F /* ViewController.swift in Sources */,
+				272BAD2E26ABB6260071001C /* TimePickerCell.swift in Sources */,
+				272BAD3326ABB6AA0071001C /* IsDoNotDisturbCell.swift in Sources */,
 				7A7F0E51267100470038B3FF /* MainViewController.swift in Sources */,
 				F13D8EE52645281C00492E92 /* StatisticViewController.swift in Sources */,
 				F16064A7261EF2820072858F /* AppDelegate.swift in Sources */,
 				27E651952670FFFB00711243 /* AlarmTimeSelectModalViewController.swift in Sources */,
+				272BAD3926ABB7B90071001C /* Alarm.swift in Sources */,
 				F16064A9261EF2820072858F /* SceneDelegate.swift in Sources */,
 				2787449726708715006AE83D /* SettingsAlarmTableViewController.swift in Sources */,
 				2744C36D265F835500543BD7 /* CollectionDetailViewController.swift in Sources */,

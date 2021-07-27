@@ -145,5 +145,5 @@ func loadUser() -> User{
     }catch{
         print(error)
     }
-    return User(name: "initName", pathogenDic: [:], washDataList: [], handState: HandState(lastWashTime: Date(), pathogenAmount: 0), exp: 0, isAlarmOn: false, isDoNotDisturbOn: false, doNotDisturbFrom: nil, doNotDisturbTo: nil, repeatTime: "2시간")
+    return User(name: "initName", pathogenDic: [:], washDataList: [], handState: HandState(lastWashTime: Date(), pathogenAmount: 0), exp: 0)
 }
