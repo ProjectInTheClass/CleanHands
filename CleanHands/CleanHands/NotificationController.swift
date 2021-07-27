@@ -9,6 +9,20 @@ import Foundation
 import UserNotifications
 
 struct NotificationController {
+    let content = UNMutableNotificationContent()
+    let center = UNUserNotificationCenter.current()
+    var calendar = Calendar.current
+    
+    init() {
+        content.title = "손이 더러워요!"
+        content.body = "손을 안씻은지 오래됐어요! 손을 씻어주세요."
+        content.categoryIdentifier = "alarm"
+        content.sound = UNNotificationSound.default
+        
+        calendar.locale = Locale.current
+        calendar.timeZone = TimeZone.current
+    }
+    
     func setNotificationPermission() {
         let notificationCenter = UNUserNotificationCenter.current()
         
@@ -28,113 +42,76 @@ struct NotificationController {
         }
     }
     
-    func scheduleNotification(_ alarm: Alarm) {
-        guard let interval = alarm.repeatTimeToAlarmString?.getTimeInSeconds() else { return }
+    func requestNotification(_ trigger: UNCalendarNotificationTrigger) {
         
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        let randomIdentifier = UUID().uuidString
+        let request = UNNotificationRequest(identifier: randomIdentifier, content: content, trigger: trigger)
         
-        if alarm.isAlarmOn {
-            let center = UNUserNotificationCenter.current()
-            let content = UNMutableNotificationContent()
-            
-            content.title = "손이 더러워요!"
-            content.body = "손을 안씻은지 오래됐어요! 손을 씻어주세요."
-            content.categoryIdentifier = "alarm"
-            content.sound = UNNotificationSound.default
-            
-            if alarm.isDoNotDisturbOn {
-                var calendar = Calendar.current
-                calendar.locale = Locale.current
-                calendar.timeZone = TimeZone.current
-                
-                let currentTimeComponents = calendar.dateComponents([.hour, .minute], from: Date())
-                
-                // 비교를 위한 Date 치환
-                let fromComponentDate = calendar.date(from: alarm.fromToDateComponents)
-                let toComponentDate = calendar.date(from: alarm.toToDateComponents)
-                let currentComponentDate = calendar.date(from: currentTimeComponents)
-                
-                calendar.date(byAdding: .second, value: interval, to: Date())
-                
-                print(alarm.fromToDateComponents)
-                
-                let trigger = UNCalendarNotificationTrigger(dateMatching: alarm.fromToDateComponents, repeats: true)
-                
-                print(alarm.fromToDateComponents)
-                
-                let content = UNMutableNotificationContent()
-                content.title = "Daily reminder"
-                content.body = "Enjoy your day!"
-
-                let randomIdentifier = UUID().uuidString
-                let request = UNNotificationRequest(identifier: randomIdentifier, content: content, trigger: trigger)
-
-                print("alarm set")
-                
-                UNUserNotificationCenter.current().add(request) { error in
-                  if error != nil {
-                    print("something went wrong")
-                  }
-                }
-                
-            } else {
-                
-            }
-            
+        UNUserNotificationCenter.current().add(request) { error in
+          if error != nil {
+            print("alarm trigger request went wrong")
+          }
         }
-        
-        
-//        
-//        let now = Date()
-//        
-//        var i = interval
-//        
-//        while true {
-//            let date: Date = now + TimeInterval(i)
-            
-//            if isDoNotDisturbOn {
-//
-//                let fromTime = User.userState.doNotDisturbFrom!
-//                let toTime = User.userState.doNotDisturbTo!
-//
-//                print(fromTime)
-//                print(date)
-//                print("now \(now)")
-//                print(toTime)
-//                print()
-//                if fromTime <= date && date <= toTime {
-//
-//
-//                    i = i + interval
-//                    if i > 86400 {
-//                        break
-//                    }
-//                    continue
-//                }
-//            }
-            
-//            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: date)
-//
-//            print(dateComponents)
-//
-//            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-//
-//            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-//
-//            center.add(request)
-//
-//            i = i + interval
-//            if i > 86400 {
-//                break
-//            }
-//        }
     }
     
-    func getCurrentLocaleFormatter() -> DateFormatter {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .full
-        dateFormatter.timeStyle = .full
-        dateFormatter.locale = Locale.current
-        return dateFormatter
+    func scheduleNotification(_ alarm: Alarm) {
+        guard let interval = alarm.repeatTimeToAlarmString?.getTimeInSeconds(),
+              let fromHour = alarm.fromToDateComponents.hour,
+              let fromMinute = alarm.fromToDateComponents.minute,
+              let toHour = alarm.toToDateComponents.hour,
+              let toMinute = alarm.toToDateComponents.minute else { return }
+        
+        let numberOfNotification = 86400 / interval
+        
+        // from now
+        var dateComponents = calendar.dateComponents([.hour, .minute], from: Date())
+        
+        center.removeAllPendingNotificationRequests()
+        
+        var lastHour: Int = dateComponents.hour!
+        var isNextDay: Bool = false
+        
+        if alarm.isAlarmOn {
+            for _ in Range(1...numberOfNotification) {
+                var date = calendar.date(from: dateComponents)!
+                date = date + TimeInterval(interval)
+                
+                dateComponents = calendar.dateComponents([.hour, .minute], from: date)
+                
+                if lastHour > dateComponents.hour! {
+                    isNextDay = true
+                }
+                
+                if alarm.isDoNotDisturbOn {
+                    let hour = isNextDay ? dateComponents.hour! + 24 : dateComponents.hour!
+                    let minute = dateComponents.minute!
+                    
+                    let fromTimeInMinutes = fromHour * 60 + fromMinute
+                    var toTimeInMinutes = toHour * 60 + toMinute
+                    
+                    if fromTimeInMinutes > toTimeInMinutes {
+                        toTimeInMinutes = toTimeInMinutes + 60 * 24
+                    }
+                    
+                    let currentDateComponentsTimeInMinutes = hour * 60 + minute
+                    
+                    if fromTimeInMinutes <= currentDateComponentsTimeInMinutes &&
+                        currentDateComponentsTimeInMinutes <= toTimeInMinutes {
+                        continue
+                    }
+                }
+                
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                
+                requestNotification(trigger)
+
+                lastHour = dateComponents.hour!
+                
+                print("alarm!")
+                print(dateComponents.hour)
+                print(dateComponents.minute)
+                print()
+            }
+        }
     }
 }

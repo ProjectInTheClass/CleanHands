@@ -120,35 +120,6 @@ class SettingsAlarmTableViewController: UITableViewController {
         self.tableView.deselectRow(at: IndexPath.init(row: 1, section: 0), animated: true)
     }
     
-    /*
-    func setDoNotDisturb() {
-        let timepickerCell = self.tableView.cellForRow(at: IndexPath.init(row: 3, section: 0)) as! TimePickerCell
-        
-        if let fromTime = User.userState.doNotDisturbFrom,
-           let toTime = User.userState.doNotDisturbTo {
-            
-            if toTime < Date() {
-                timepickerCell.fromTimePicker.date = Date(timeInterval: 86400, since: fromTime)
-                timepickerCell.toTimePicker.date = Date(timeInterval: 86400, since: toTime)
-                User.userState.doNotDisturbFrom = timepickerCell.fromTimePicker.date
-                User.userState.doNotDisturbTo = timepickerCell.toTimePicker.date
-                saveUserState()
-            } else {
-                timepickerCell.fromTimePicker.date = fromTime
-                timepickerCell.toTimePicker.date = toTime
-            }
-        } else {
-            let from = Date()
-            let to = Date()
-            timepickerCell.fromTimePicker.date = from
-            timepickerCell.toTimePicker.date = to
-            User.userState.doNotDisturbFrom = from
-            User.userState.doNotDisturbTo = to
-            saveUserState()
-        }
-    }
-     */
-    
     @IBAction func fromTimePickerChanged(_ sender: UIDatePicker) {
         alarm.from = sender.date
         alarmController.alarm = alarm
@@ -163,17 +134,5 @@ class SettingsAlarmTableViewController: UITableViewController {
         alarmController.saveAlarmToUserState()
         
         notificationController.scheduleNotification(alarm)
-        
-//        if timepickerCell.fromTimePicker.date > sender.date {
-//            let date = sender.date + TimeInterval(86400)
-//            User.userState.doNotDisturbTo = date
-//        } else {
-//            User.userState.doNotDisturbTo = sender.date
-//        }
-//        saveUserState()
-        
-//        removeAllNotification()
-//        scheduleNotification()
-        
     }
 }
